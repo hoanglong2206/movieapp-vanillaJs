@@ -16,39 +16,43 @@ export function search() {
 
   searchField.addEventListener("input", function () {
     if (!searchField.value.trim()) {
-      searchResults.classList.remove("active");
       searchWrapper.classList.remove("searching");
+      searchResults.classList.remove("active");
       clearTimeout(searchTimeout);
-    }
+    } else {
+      searchWrapper.classList.add("searching");
+      clearTimeout(searchTimeout);
 
-    searchWrapper.classList.add("searching");
-    clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        fetchDataFromServer(
+          `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchField.value}&page=1&include_adult=false`,
+          function ({ results: movieList }) {
+            searchWrapper.classList.remove("searching");
+            searchResults.classList.add("active");
+            searchResults.innerHTML = "";
 
-    searchTimeout = setTimeout(() => {
-      fetchDataFromServer(
-        `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&query=${searchField.value}&page=1&include_adult=false`,
-        function ({ results: movieList }) {
-          searchWrapper.classList.remove("searching");
-          searchResults.classList.add("active");
-          searchResults.innerHTML = "";
+            searchResults.innerHTML = `
+              <p class="label">Results for</p>
+  
+              <h1 class="heading">${searchField.value}</h1>
+  
+              <div class="movie-list">
+                <div class="grid-list"></div>
+              </div>
+            `;
 
-          searchResults.innerHTML = `
-            <p class="label">Results for</p>
+            for (const movie of movieList) {
+              const movieCard = createMovieCard(movie);
 
-            <h1 class="heading">${searchField.value}</h1>
-
-            <div class="movie-list">
-              <div class="grid-list"></div>
-            </div>
-          `;
-
-          for (const movie of movieList) {
-            const movieCard = createMovieCard(movie);
-
-            searchResults.querySelector(".grid-list").appendChild(movieCard);
+              if (movieCard instanceof Node) {
+                searchResults
+                  .querySelector(".grid-list")
+                  .appendChild(movieCard);
+              }
+            }
           }
-        }
-      );
-    }, 500);
+        );
+      }, 500);
+    }
   });
 }
