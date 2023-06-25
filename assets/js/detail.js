@@ -72,71 +72,71 @@ fetchDataFromServer(
     movieDetail.classList.add("movie-detail");
 
     movieDetail.innerHTML = `
-      <div
-        class="backdrop-image"
-        style="background-image: url('${imageBaseUrl}${"w1280" || "original"}${
-      backdrop_path || poster_path
-    }');"
-      ></div>
+      <div class="detail-movie">
+        <div
+          class="backdrop-image"
+          style="background-image: url('${imageBaseUrl}${
+      "w1280" || "original"
+    }${backdrop_path || poster_path}');"
+        ></div>
 
-      <figure class="poster-box movie-poster">
-        <img
-          src="${imageBaseUrl}w342${poster_path}"
-          alt="${title}"
-          class="img-cover"
-        />
-      </figure>
+        <figure class="poster-box movie-poster">
+          <img
+            src="${imageBaseUrl}w342${poster_path}"
+            alt="${title}"
+            class="img-cover"
+          />
+        </figure>
 
-      <div class="detail-box">
-        <div class="detail-content">
-          <h1 class="heading">${title}</h1>
+        <div class="detail-box">
+          <div class="detail-content">
+            <h1 class="heading">${title}</h1>
 
-          <div class="meta-list">
-            <div class="meta-item">
-              <img
-                src="./assets/images/star.png"
-                width="20"
-                height="20"
-                alt="rating"
-              />
+            <div class="meta-list">
+              <div class="meta-item">
+                <img
+                  src="./assets/images/star.png"
+                  width="20"
+                  height="20"
+                  alt="rating"
+                />
 
-              <span class="span">${vote_average}</span>
+                <span class="span">${vote_average}</span>
+              </div>
+
+              <div class="separator"></div>
+              <div class="meta-item">${runtime}m</div>
+
+              <div class="separator"></div>
+              <div class="meta-item">${release_date}</div>
+
+              <div class="meta-item card-badge">${certification}</div>
             </div>
 
-            <div class="separator"></div>
-            <div class="meta-item">${runtime}m</div>
+            <p class="genre">${getGenres(genres)}</p>
 
-            <div class="separator"></div>
-            <div class="meta-item">${release_date}</div>
+            <p class="overview">${overview}</p>
 
-            <div class="meta-item card-badge">${certification}</div>
+            <ul class="detail-list">
+              <div class="list-item">
+                <p class="list-name">Starring</p>
+
+                <p>${getCasts(cast)}</p>
+              </div>
+              <div class="list-item">
+                <p class="list-name">Directed By</p>
+
+                <p>${getDirectors(crew)}</p>
+              </div>
+            </ul>
           </div>
-
-          <p class="genre">${getGenres(genres)}</p>
-
-          <p class="overview">${overview}</p>
-
-          <ul class="detail-list">
-            <div class="list-item">
-              <p class="list-name">Starring</p>
-
-              <p>${getCasts(cast)}</p>
-            </div>
-            <div class="list-item">
-              <p class="list-name">Directed By</p>
-
-              <p>${getDirectors(crew)}</p>
-            </div>
-          </ul>
         </div>
-
-        <div class="title-wrapper">
-          <h3 class="title-large">Trailers and Clips</h3>
-        </div>
-
-        <div class="slider-list">
-          <div class="slider-inner"></div>
-        </div>
+      </div>
+      <div class="title-wrapper">
+        <h3 class="title-large">Trailers and Clips</h3>
+      </div>
+      <div class="slider-list">
+        <div class="slider-inner"></div>
       </div>
     `;
 

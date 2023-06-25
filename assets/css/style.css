@@ -2,10 +2,6 @@
   #style.css
 \*-----------------------------------*/
 
-/**
- * copyright 2023 codewithsadee
- */
-
 /*-----------------------------------*\
   #CUSTOM PROPERTY
 \*-----------------------------------*/
@@ -239,7 +235,9 @@ body {
   transition: var(--transition-short);
 }
 
-.card-badge {
+.card-badge,
+.list-name,
+.meta-item {
   background-color: var(--banner-background);
   color: var(--white);
   font-size: var(--fs-label);
@@ -790,6 +788,12 @@ body {
   #MEDIA QUERIES
 \*-----------------------------------*/
 
+@media (max-width: 575px) {
+  .detail-content {
+    margin-block-start: 150px;
+  }
+}
+
 @media (min-width: 575px) {
   .banner-content {
     right: auto;
@@ -840,20 +844,22 @@ body {
     left: 50px;
   }
 
-  .movie-detail {
+  .detail-movie {
     display: flex;
     align-items: flex-start;
     gap: 40px;
   }
 
-  .movie-detail .detail-box {
+  .detail-movie .detail-box {
     flex-grow: 1;
   }
 
-  .movie-detail .movie-poster {
+  .detail-movie .movie-poster {
     flex-shrink: 0;
-    position: sticky;
-    top: 0;
+  }
+
+  .movie-detail .title-wrapper {
+    margin-block-start: 96px;
   }
 
   .movie-detail .slider-list {
@@ -902,11 +908,6 @@ body {
 
   .container {
     height: calc(100vh - 104px);
-    border-top-left-radius: var(--radius-36);
-  }
-
-  .backdrop-image {
-    border-top-left-radius: var(--radius-36);
   }
 
   .banner-content {
