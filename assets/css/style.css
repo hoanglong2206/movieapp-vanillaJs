@@ -848,6 +848,7 @@ body {
     display: flex;
     align-items: flex-start;
     gap: 40px;
+    min-height: 500px;
   }
 
   .detail-movie .detail-box {

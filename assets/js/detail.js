@@ -188,7 +188,9 @@ const addSuggestedMovies = function ({ results: movieList }, title) {
   for (const movie of movieList) {
     const movieCard = createMovieCard(movie);
 
-    movieListElement.querySelector(".slider-inner").appendChild(movieCard);
+    if (movieCard instanceof Node) {
+      movieListElement.querySelector(".slider-inner").appendChild(movieCard);
+    }
   }
 
   pageContent.appendChild(movieListElement);
